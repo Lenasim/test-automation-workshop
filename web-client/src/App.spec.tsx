@@ -37,17 +37,26 @@ const GET_WILDERS_ERROR_MOCK =
     request: {
       query: GET_WILDERS,
     },
-    result: {
-      errors: [apolloError, apolloError],
-    },
+
+    // result: {
+    //   errors: [apolloError],
+    // },
+
     // result: {
     //   errors: [new GraphQLError('Error!')],
     // },
-    // error: apolloError
-    // new Error('An error occurred'),
+
+    // error: new Error('An error occurred'),
+
     // result: { 
     //   errors: [{ message: "An error occurre" }] 
     // }
+
+    error: {
+      name: 'GRAPHQL_VALIDATION_FAILED',
+      message:
+        'Cannot query field "wilders_error" on type "Query". Did you mean "wilders"?',
+    },
   }
 
 
