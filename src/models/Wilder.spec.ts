@@ -1,4 +1,4 @@
-import { getDisplayName } from './Wilder';
+import { getDisplayName, TrainingType } from './Wilder';
 
 describe('getDisplayName', () => {
   describe('when not passed city', () => {
@@ -21,15 +21,23 @@ describe('getDisplayName', () => {
         expect(getDisplayName('Lucie', 'Laforêt', 'Paris')).toEqual(
           '[PAR] Lucie Laforêt'
         );
+        expect(getDisplayName('Lucie', 'Laforêt', 'Strasbourg')).toEqual(
+          '[SXB] Lucie Laforêt'
+        );
       });
     });
   });
 
-  describe('when passed Work_And_Study as a trainingType', () => {
-    it('returns city code, trainingType and full name', () => {
-      expect(getDisplayName('Lucie', 'Laforêt', undefined,'WORK_AND_STUDY')).toEqual(
-        '[? - WnS] Lucie Laforêt'
-      );
+  describe('when passed WORK_AND_STUDY as training type', () => {
+    it('returns WnS label and full name', () => {
+      expect(
+        getDisplayName(
+          'Lucie',
+          'Laforêt',
+          undefined,
+          TrainingType.WORK_AND_STUDY
+        )
+      ).toEqual('[? - WnS] Lucie Laforêt');
     });
   });
 });

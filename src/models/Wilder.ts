@@ -7,6 +7,8 @@ import {
 } from 'typeorm';
 import { ObjectType, Field, ID, registerEnumType } from 'type-graphql';
 
+import { cityCodes } from './cityCodes';
+
 export const DEFAULT_CITY = '';
 export enum TrainingType {
   FULL_TIME = 'FULL_TIME',
@@ -21,17 +23,7 @@ export const getDisplayName = (
   city = DEFAULT_CITY,
   trainingType = DEFAULT_TRAINING_TYPE
 ): string => {
-  const cityCode : Record<string, string> = {
-    Paris: 'PAR',
-    Strasbourg: 'SXG',
-    Lyon: 'LYON',
-    Reims: 'R1S'
-  }
-  const displayCity = cityCode[city] || city || '?';
-  const traningTypeCode : Record<string, string> = {
-    WORK_AND_STUDY: 'WnS',
-    // FULL_TIME: ''
-  }
+  const displayCity = cityCodes[city] || city || '?';
   return `[${(trainingType === TrainingType.WORK_AND_STUDY
     ? [displayCity, 'WnS']
     : [displayCity]

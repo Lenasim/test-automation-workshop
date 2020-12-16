@@ -5,9 +5,9 @@ import { MockedProvider } from '@apollo/client/testing'
 import { GraphQLError } from 'graphql';
 
 
-
+const GET_WILDERS_UNFETCHED_MOCK = []
 //fictive data
-const GET_WILDERS_SUCCESS_MOCK = 
+const GET_WILDERS_SUCCESS_MOCK =[ 
   {
     request: {
       query: GET_WILDERS,
@@ -27,12 +27,12 @@ const GET_WILDERS_SUCCESS_MOCK =
       },
     },
   }
-;
+];
 
 const apolloError = new GraphQLError('Error!');
 
 
-const GET_WILDERS_ERROR_MOCK = 
+const GET_WILDERS_ERROR_MOCK = [
   {
     request: {
       query: GET_WILDERS,
@@ -58,7 +58,7 @@ const GET_WILDERS_ERROR_MOCK =
         'Cannot query field "wilders_error" on type "Query". Did you mean "wilders"?',
     },
   }
-
+]
 
 
 describe('App',() => {
@@ -66,7 +66,7 @@ describe('App',() => {
   describe('while fetching wilders', () => {
     it('renders loading', () => {
       render(
-        <MockedProvider mocks={[]} addTypename={false}>
+        <MockedProvider mocks={GET_WILDERS_UNFETCHED_MOCK} addTypename={false}>
           <App />
         </MockedProvider>
         )
@@ -77,7 +77,7 @@ describe('App',() => {
   describe('while fetching wilders failed', () => {
     it('renders error', async () => {
       render(
-        <MockedProvider mocks={[GET_WILDERS_ERROR_MOCK]} addTypename={false}>
+        <MockedProvider mocks={GET_WILDERS_ERROR_MOCK} addTypename={false}>
           <App />
         </MockedProvider>
         )
@@ -93,21 +93,18 @@ describe('App',() => {
   describe('while fetching wilders successed', () => {
     it('renders wilders', async () => {
       render(
-        <MockedProvider mocks={[GET_WILDERS_SUCCESS_MOCK]} addTypename={false}>
+        <MockedProvider mocks={GET_WILDERS_SUCCESS_MOCK} addTypename={false}>
           <App />
         </MockedProvider>
-        )
+      );
 
-      const list = await waitFor(() => screen.getByRole('list'))
-      const listItems = within(list).getAllByRole('listitem')
+      const list = await waitFor(() => screen.getByRole('list'));
 
-      // expect(list).toBeInTheDocument()
-      expect(listItems).toHaveLength(2)
+      const listItems = within(list).getAllByRole('listitem');
+      expect(listItems).toHaveLength(2);
+
       expect(listItems[0]).toHaveTextContent('[SXB] Lorie Laurette');
       expect(listItems[1]).toHaveTextContent('[PAR] Laure Laurent');
-    })
-  })
-
-})
-
-
+    });
+  });
+});

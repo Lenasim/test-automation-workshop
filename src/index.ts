@@ -1,12 +1,8 @@
 import 'reflect-metadata';
 import express from 'express';
-// import { ApolloServer } from 'apollo-server-express';
-// import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 
-import { getApolloServer } from './server'
-
-import WilderResolver from './resolvers/WilderResolver'; // add this
+import { getApolloServer } from './server';
 
 const main = async () => {
   await createConnection();
