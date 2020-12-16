@@ -1,17 +1,21 @@
 import 'reflect-metadata';
 import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
-import { buildSchema } from 'type-graphql';
+// import { ApolloServer } from 'apollo-server-express';
+// import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
+
+import { getApolloServer } from './server'
 
 import WilderResolver from './resolvers/WilderResolver'; // add this
 
 const main = async () => {
   await createConnection();
-  const schema = await buildSchema({
-    resolvers: [WilderResolver],
-  });
-  const server = new ApolloServer({ schema });
+  const server = await getApolloServer();
+  
+  //   const schema = await buildSchema({
+  //   resolvers: [WilderResolver],
+  // });
+  // const server = new ApolloServer({ schema });
 
   const app = express();
   server.applyMiddleware({ app });

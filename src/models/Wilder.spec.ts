@@ -24,4 +24,12 @@ describe('getDisplayName', () => {
       });
     });
   });
+
+  describe('when passed Work_And_Study as a trainingType', () => {
+    it('returns city code, trainingType and full name', () => {
+      expect(getDisplayName('Lucie', 'Laforêt', undefined,'WORK_AND_STUDY')).toEqual(
+        '[? - WnS] Lucie Laforêt'
+      );
+    });
+  });
 });

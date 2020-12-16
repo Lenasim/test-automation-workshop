@@ -43,7 +43,7 @@ const App = (): JSX.Element => {
       {loading ? (
         <div>Chargement en cours…</div>
       ) : error ? (
-        <div>Erreur de chargement.</div>
+        <div aria-label="error_message">Erreur de chargement.</div>
       ) : (
         data && (
           <StyledWilderList>

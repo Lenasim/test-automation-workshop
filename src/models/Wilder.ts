@@ -21,8 +21,23 @@ export const getDisplayName = (
   city = DEFAULT_CITY,
   trainingType = DEFAULT_TRAINING_TYPE
 ): string => {
-  return `[${city || '?'}] ${firstName} ${lastName}`;
+  const cityCode : Record<string, string> = {
+    Paris: 'PAR',
+    Strasbourg: 'SXG',
+    Lyon: 'LYON',
+    Reims: 'R1S'
+  }
+  const displayCity = cityCode[city] || city || '?';
+  const traningTypeCode : Record<string, string> = {
+    WORK_AND_STUDY: 'WnS',
+    // FULL_TIME: ''
+  }
+  return `[${(trainingType === TrainingType.WORK_AND_STUDY
+    ? [displayCity, 'WnS']
+    : [displayCity]
+  ).join(' - ')}] ${firstName} ${lastName}`;
 };
+
 
 @Entity()
 @ObjectType()
